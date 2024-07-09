@@ -11,7 +11,89 @@ class Player {
 
 void main() {
   // runApp(const App());
-  runApp(const MyStatefulWidget());
+  // runApp(const MyStatefulWidget());
+  runApp(const MyLargeTitleWidget());
+}
+
+class MyLargeTitleWidget extends StatefulWidget {
+  const MyLargeTitleWidget({super.key});
+
+  @override
+  State<MyLargeTitleWidget> createState() => _MyLargeTitleWidgetState();
+}
+
+class _MyLargeTitleWidgetState extends State<MyLargeTitleWidget> {
+  bool showTitle = true;
+
+  void toggleTitle() {
+    setState(() {
+      showTitle = !showTitle;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
+          ),
+        ),
+      ),
+      home: Scaffold(
+        backgroundColor: const Color(0xFFF4EDDB),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              showTitle ? const MyLargeTitle() : const Text('nothing'),
+              IconButton(
+                onPressed: toggleTitle,
+                icon: const Icon(Icons.remove_red_eye),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyLargeTitle extends StatefulWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  @override
+  void dispose() {
+// TODO: implement dispose
+    super.dispose();
+    print('dispose');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('initState');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('build');
+    return Text(
+      'My Large Title',
+      style: TextStyle(
+        fontSize: 30,
+        color: Theme.of(context).textTheme.titleLarge?.color,
+      ),
+    );
+  }
 }
 
 class MyStatefulWidget extends StatefulWidget {
