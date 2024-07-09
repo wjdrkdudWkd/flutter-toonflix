@@ -10,8 +10,64 @@ class Player {
 }
 
 void main() {
-  runApp(const App());
+  // runApp(const App());
+  runApp(const MyStatefulWidget());
 }
+
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({super.key});
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int counter = 0;
+  List<int> numbers = [];
+
+  void onClicked() {
+    setState(() {
+      counter = counter + 1;
+    });
+    numbers.add(numbers.length);
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: const Color(0xFFF4EDDB),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Click Count',
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+              for (var n in numbers) Text('$n'),
+              Text(
+                '$counter',
+                style: const TextStyle(
+                  fontSize: 30,
+                ),
+              ),
+              IconButton(
+                  iconSize: 40,
+                  onPressed: onClicked,
+                  icon: const Icon(Icons.add_box_rounded))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class OxFFF4EDDB {}
 
 class App extends StatelessWidget {
   const App({super.key});
