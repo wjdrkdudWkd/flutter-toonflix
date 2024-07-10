@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:toonflix/screens/home_screen.dart';
 import 'package:toonflix/widgets/button.dart';
 import 'package:toonflix/widgets/currency_card.dart';
 
@@ -12,7 +13,28 @@ class Player {
 void main() {
   // runApp(const App());
   // runApp(const MyStatefulWidget());
-  runApp(const MyLargeTitleWidget());
+  // runApp(const MyLargeTitleWidget());
+  runApp(const PomodoroWidget());
+}
+
+class PomodoroWidget extends StatelessWidget {
+  const PomodoroWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        dialogBackgroundColor: const Color(0xFFE7626C),
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
+          ),
+        ),
+        cardColor: const Color(0xFFF4EDDB),
+      ),
+      home: const HomeScreen(),
+    );
+  }
 }
 
 class MyLargeTitleWidget extends StatefulWidget {
