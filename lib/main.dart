@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toonflix/screens/home_screen.dart';
+import 'package:toonflix/screens/toonflix_home_screen.dart';
+import 'package:toonflix/service/api_service.dart';
 import 'package:toonflix/widgets/button.dart';
 import 'package:toonflix/widgets/currency_card.dart';
 
@@ -14,7 +16,19 @@ void main() {
   // runApp(const App());
   // runApp(const MyStatefulWidget());
   // runApp(const MyLargeTitleWidget());
-  runApp(const PomodoroWidget());
+  // runApp(const PomodoroWidget());
+  runApp(const Toonflix());
+}
+
+class Toonflix extends StatelessWidget {
+  const Toonflix({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: ToonflixHomeScreen(),
+    );
+  }
 }
 
 class PomodoroWidget extends StatelessWidget {
