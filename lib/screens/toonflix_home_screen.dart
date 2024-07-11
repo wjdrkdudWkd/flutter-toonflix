@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:toonflix/main.dart';
 import 'package:toonflix/models/webtoon_model.dart';
 import 'package:toonflix/service/api_service.dart';
+import 'package:toonflix/widgets/webtoon_widget.dart';
 
 class ToonflixHomeScreen extends StatelessWidget {
   ToonflixHomeScreen({super.key});
@@ -42,22 +44,42 @@ class ToonflixHomeScreen extends StatelessWidget {
             //     var webtoon = snapshot.data![index];
             //     return Text(webtoon.title);
             //   },
-            return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                var webtoon = snapshot.data![index];
-                return Text(webtoon.title);
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                width: 20,
-              ),
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Expanded(
+                    child: ScrollConfiguration(
+                  behavior: MyCustomScrollBehavior(),
+                  child: makeList(snapshot),
+                ))
+              ],
             );
           }
           return const Center(
             child: CircularProgressIndicator(),
           );
         },
+      ),
+    );
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      itemBuilder: (context, index) {
+        var webtoon = snapshot.data![index];
+        return WebtoonWidget(
+          title: webtoon.title,
+          thumb: webtoon.thumb,
+          id: webtoon.id,
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
       ),
     );
   }

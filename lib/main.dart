@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:toonflix/screens/home_screen.dart';
@@ -6,18 +9,31 @@ import 'package:toonflix/service/api_service.dart';
 import 'package:toonflix/widgets/button.dart';
 import 'package:toonflix/widgets/currency_card.dart';
 
-class Player {
-  String name;
-
-  Player(this.name);
-}
-
 void main() {
   // runApp(const App());
   // runApp(const MyStatefulWidget());
   // runApp(const MyLargeTitleWidget());
   // runApp(const PomodoroWidget());
   runApp(const Toonflix());
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..userAgent =
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36';
+  }
 }
 
 class Toonflix extends StatelessWidget {
